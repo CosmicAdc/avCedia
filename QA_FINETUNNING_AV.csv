@@ -1,0 +1,64 @@
+context;importance;human;response
+"COMPUTO PARALELODR. GABRIEL LEON PAREDESgleon@ups.edu.ecwww.linkedin.com/in/gabrielleonpCloud Computing, Smart Cities & High Performance ComputingCuenca, Ecuador
+";Alta;¿Cuáles son los principales intereses del Dr. Gabriel Leon Paredes en su perfil profesional?;"Los principales intereses del Dr. Gabriel Leon Paredes según su perfil profesional son:
+
+1. Cloud Computing
+2. Smart Cities 
+3. High Performance Computing (Computación de Alta Performance)
+
+Estos intereses se mencionan explícitamente en el contexto proporcionado."
+"COMPUTO PARALELODR. GABRIEL LEON PAREDESgleon@ups.edu.ecwww.linkedin.com/in/gabrielleonpCloud Computing, Smart Cities & High Performance ComputingCuenca, Ecuador
+";Alta;¿Cuáles son los principales campos de interés de D. Gabriel Leon Paredes?;Los principales campos de interés de D. Gabriel Leon Paredes según el contexto proporcionado son Cloud Computing, Smart Cities y Computación Paralela.
+"Introducción
+2
+La industria de la informática se caracteriza por la búsqueda de un rendimiento cada vez mayor y eficiente, desde aplicaciones de alta gama en los sectores de redes, telecomunicaciones, aviónica, hasta sistemas integrados de baja potencia en computadoras de escritorio, computadoras portátiles y videojuegos. Esta ruta de desarrollo ha llevado a sistemas de múltiples núcleos, en donde los procesadores de dos, cuatro y ocho núcleos representan solo el comienzo de una próxima expansión a un número cada vez mayor de núcleos informáticos.";Alta;¿Cuántos núcleos pueden tener los procesadores según el contexto proporcionado?;Según el contexto proporcionado, los procesadores pueden tener dos, cuatro y ocho núcleos. El texto menciona que estos representan solo el comienzo de una próxima expansión a un número cada vez mayor de núcleos informáticos.
+"Computación en paralelo
+Tuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes3
+La computación paralela, de hecho, representa el uso simultáneo de múltiples recursos informáticos para resolver un problema de procesamiento, de modo que pueda ejecutarse en múltiples CPU, dividiendo un problema en partes discretas que pueden procesarse simultáneamente, donde cada parte se divide en una serie de instrucciones que se pueden ejecutar en serie. en diferentes CPUs.";Alta;¿Qué es la computación paralela y cómo funciona?;La computación paralela es el uso simultáneo de múltiples recursos informáticos para resolver un problema de procesamiento, dividiendo un problema en partes discretas que pueden procesarse simultáneamente. Cada parte se divide en una serie de instrucciones que se ejecutan en diferentes CPUs. Esencialmente, esto permite acelerar el proceso de resolución del problema al aprovechar la capacidad de múltiples CPU para trabajar juntas en diferentes segmentos del mismo problema.
+Los recursos informáticos pueden incluir una sola computadora con múltiples procesadores, un número arbitrario de computadoras conectadas a través de una red o una combinación de ambos enfoques. La computación paralela se ha considerado el futuro de la computación, y hasta hace unos años, estuvo motivada por simulaciones numéricas de sistemas complejos y situaciones relacionadas con diversos sectores: pronósticos meteorológicos y climáticos, reacciones químicas y nucleares, mapeo del genoma humano, entre otros.;Alta;¿Cuáles son los sectores que han sido beneficiados por la computación paralela según el contexto proporcionado?;Según el contexto proporcionado, los sectores que han sido beneficiados por la computación paralela incluyen pronósticos meteorológicos y climáticos, reacciones químicas y nucleares, y mapeo del genoma humano.
+"Computación en paralelo
+Tuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes4•Hoy, sin embargo, varias aplicaciones comerciales exigen el desarrollo de computadoras cada vez más rápidas para admitir el procesamiento de grandes cantidades de datos de manera sofisticada. Aplicaciones como: minería de datos, bases de datos paralelas, exploración de petróleo, motores de búsqueda web, servicios de negocios en red, diagnósticos médicos asistidos por computadora, gestión de compañías multinacionales, gráficos avanzados, realidad virtual (especialmente, en la industria de los videojuegos), multimedia, entre otras.•La computación paralela representa un intento de maximizar ese recurso de tiempo infinito, pero al mismo tiempo, cada vez más valioso y escaso.";Alta;¿Cuáles son algunas aplicaciones comerciales que requieren el desarrollo de computadoras cada vez más rápidas para procesar grandes cantidades de datos?;"Algunas aplicaciones comerciales que requieren el desarrollo de computadoras cada vez más rápidas para procesar grandes cantidades de datos incluyen:
+
+- Minería de datos
+- Bases de datos paralelas
+- Exploración de petróleo
+- Motores de búsqueda web
+- Servicios de negocios en red
+- Diagnósticos médicos asistidos por computadora
+- Gestión de compañías multinacionales
+- Gráficos avanzados
+- Realidad virtual (especialmente, en la industria de los videojuegos)
+- Multimedia"
+Esta es la razón por la cual la computación paralela está cambiando del mundo de las supercomputadoras muy caras, reservadas para unos pocos, a soluciones más económicas y basadas en múltiples procesadores, unidades de procesamiento de gráficos (GPU) o unas pocas computadoras interconectadas que pueden superar las limitaciones de la serie informática y los límites de las CPU individuales.;Alta;¿Cuáles tecnologías están reemplazando a las supercomputadoras muy caras en el campo de la computación paralela?;Unidades de procesamiento de gráficos (GPU) y múltiples procesadores son tecnologías que están reemplazando a las supercomputadoras muy caras en el campo de la computación paralela. Además, soluciones basadas en unas pocas computadoras interconectadas también están contribuyendo a este cambio.
+"Computación Paralela vs Computación Distribuida
+•Los modelos de computación paralela y distribuida se basan en el uso simultáneo de diferentes unidades de procesamiento para la ejecución de un programa. •Aunque la distinción entre computación paralela y distribuida es muy delgada, una de las definiciones posibles asocia:•el modelo de computación paralelo con el modelo de memoria compartida, y •el modelo de computación distribuida con el modelo de paso de mensajes.";Alta;¿Cuáles son los dos modelos principales asociados a la computación paralela y distribuida según el contexto proporcionado?;"Según el contexto proporcionado, los dos modelos principales asociados son:
+
+1. El modelo de computación paralelo con el modelo de memoria compartida.
+2. El modelo de computación distribuida con el modelo de paso de mensajes."
+¿Porquénecesitamos la computación paralela? •El crecimiento de la potencia computacional ofrecido en las computadoras modernas ha sido el resultado de enfrentar complejos problemas computacionales en plazos de tiempo relativamente cortos.;Alta;¿Cuál es el motivo para utilizar la computación paralela según el contexto proporcionado?;NO INFORMATION
+•Hasta principios de la década de 2000, la complejidad se abordaba aumentando el número de transistores, así como la frecuencia de reloj de los sistemas de un solo procesador, que alcanzaron picos de 3.5-4 GHz.•Sin embargo, el aumento en el número de transistores provoca el aumento exponencial del calor disipado por los propios procesadores. •Por lo tanto, existe una limitación física que impide seguir mejorando el rendimiento de los sistemas de un solo procesador.Tuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes6;Alta;¿Cuál fue el problema principal que se presentó al intentar mejorar el rendimiento de los sistemas de un solo procesador a principios de la década de 2000?;El problema principal que se presentó al intentar mejorar el rendimiento de los sistemas de un solo procesador a principios de la década de 2000 fue el aumento exponencial del calor disipado por los propios procesadores debido al aumento en el número de transistores.
+"HPCHigh Performance Computing (HPC) o Computo de Alto Rendimiento:•Abarca paradigmas de programación paralela, lenguajes, api’s, etc.•Es el campo científico y técnico del estudio de las “super computadoras”.•El listado de las 500 super-computadoras es constantemente actualizado. (http://www.top500.org/)
+Tuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes9";Alta;¿Qué es High Performance Computing (HPC) y cuáles son algunos de sus componentes principales?;High Performance Computing (HPC), también conocido como Computo de Alto Rendimiento, abarca paradigmas de programación paralela, lenguajes de programación, API's y otros elementos relacionados. Este campo científico y técnico se centra en el estudio y desarrollo de super computadoras.
+"Aplicaciones HPC
+Simulaciones de modelosTúneles de vientoPruebas de choques (autos/aviones)Modelado de fenómenos complejos (evolución de galaxias, armas nucleares, contaminación, epidemias)
+Obtener resultados rápido y sin retrasosAlgoritmos en-línea (Pronostico del tiempo, bolsa de valores)
+Procesar grandes volúmenes de datosAnálisis del genoma humanoBúsqueda de vida fuera de la tierra
+Tuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes10";Alta;¿Cuáles son algunas aplicaciones de las computaciones de alto rendimiento (HPC)?;"Algunas aplicaciones de las computaciones de alto rendimiento (HPC) incluyen:
+
+- Simulaciones de modelos
+- Túneles de viento
+- Pruebas de choques (autos/aviones)
+- Modelado de fenómenos complejos (evolución de galaxias, armas nucleares, contaminación, epidemias)
+- Obtener resultados rápido y sin retrasos
+- Algoritmos en-línea (Pronostico del tiempo, bolsa de valores)
+- Procesar grandes volúmenes de datos
+- Análisis del genoma humano
+- Búsqueda de vida fuera de la tierra"
+Aplicaciones HPC•Simulación de la formación y evolución de un cúmulo de galaxiashttps://www.youtube.com/watch?v=InJOTkEzQtg•Demostración de simulaciones para la ciencia e industria https://www.youtube.com/watch?v=iKR_L0xswdw•Demo GPU vs CPU https://www.youtube.com/watch?v=-P28LKWTzrI•NVIDIA CorrDiff: Resolving Extreme Weather Events With Generative AIhttps://www.youtube.com/watch?v=9vEaImsSCrw•BringingAvatarstoLifewithNVIDIA OmniverseAvatar Cloud Enginehttps://www.youtube.com/watch?v=a05X3rAfYLs•NvidiaJetsonhttps://www.youtube.com/watch?v=51TYhPJ4zysTuesday, March 26, 2024Calculo Paralelo -Gabriel León Paredes11;Alta;¿Cuáles aplicaciones de HPC se mencionan en el contexto proporcionado?;"Las aplicaciones de HPC mencionadas en el contexto proporcionado son:
+
+- Simulación de la formación y evolución de un cúmulo de galaxias
+- Demostración de simulaciones para la ciencia e industria
+- Comparación entre GPU y CPU (Demo GPU vs CPU)
+- Resolución de eventos climáticos extremos con Inteligencia Artificial Generativa (NVIDIA CorrDiff)
+- Hacer vivir personajes en Avatar con NVIDIA Omniverse Avatar Cloud Engine"
+Referencias•Zaccone, Giancarlo. Python ParallelProgrammingCookbook: Over70 recipesto solvechallengesin multithreadingand distributedsystemwithPython 3, 2nd Edition. PacktPublishing.;Alta;¿Cuál es el título del libro mencionado en la referencia?;"El título del libro mencionado en la referencia es ""Python Parallel Programming Cookbook: Over 70 recipes to solve challenges in multithreading and distributed system with Python 3, 2nd Edition""."

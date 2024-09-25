@@ -10,5 +10,5 @@ from langchain_ollama import OllamaEmbeddings
 # llm = ChatCohere(model="command-r-plus")
 # embeddings = CohereEmbeddings(model="embed-english-light-v3.0")
 
-llm = OllamaLLM(model="qwen2.5")
+llm = OllamaLLM(model="qwen2.5", temperature=0.4, num_predict=640)
 embeddings = OllamaEmbeddings(model="nomic-embed-text")
