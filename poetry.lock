@@ -794,6 +794,16 @@ wrapt = ">=1.10,<2"
 dev = ["PyTest", "PyTest-Cov", "bump2version (<1)", "sphinx (<2)", "tox"]
 
 [[package]]
+name = "docx2txt"
+version = "0.8"
+description = "A pure python-based utility to extract text and images from docx files."
+optional = false
+python-versions = "*"
+files = [
+    {file = "docx2txt-0.8.tar.gz", hash = "sha256:2c06d98d7cfe2d3947e5760a57d924e3ff07745b379c8737723922e7009236e5"},
+]
+
+[[package]]
 name = "durationpy"
 version = "0.7"
 description = "Module for converting between datetime.timedelta and Go's Duration strings."
@@ -4504,4 +4514,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "165efc5cd7d5ec4b63a69c65bcacb718e6e1562456db8031fcfdec47140d901a"
+content-hash = "dd2c91344d4ec0f28493fc345c7103c56a49286e17f2e38a6439d795602a3e34"
