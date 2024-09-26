@@ -247,6 +247,25 @@ if len(chunks) > 0:
         else:
             st.button("GUARDAR TODAS EN EL CSV", disabled=True, key="guardar_csv_completo")
 
+def limpiar_csv():
+    try:
+        df = pd.read_csv(NOMBRE_ARCHIVO_CSV, sep=';')
+        
+        # Filtrar filas donde 'human' o 'response' contenga "NO INFORMATION", esté vacía o en blanco
+        df_limpio = df[~(df['human'].str.strip().isin(["", "NO INFORMATION"]) | df['response'].str.strip().isin(["", "NO INFORMATION"]))]
+
+        # Guardar el CSV limpio
+        df_limpio.to_csv(NOMBRE_ARCHIVO_CSV, index=False, sep=';')
+        st.success("CSV limpiado con éxito. Filas con 'NO INFORMATION' o vacías han sido eliminadas.")
+    except FileNotFoundError:
+        st.error(f"El archivo {NOMBRE_ARCHIVO_CSV} no fue encontrado.")
+    except Exception as e:
+        st.error(f"Error al limpiar el CSV: {e}")
+
+# Botón para limpiar el CSV
+if st.button("Limpiar CSV"):
+    limpiar_csv()
+      
 
 else:
     st.write("Esperando que se suba un documento...")
