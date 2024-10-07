@@ -8,7 +8,8 @@ st.set_page_config(page_title="Generador de Preguntas y Respuestas", layout="wid
 st.title("Generador de Preguntas y Respuestas basado en LLM")
 
 # Cargar el archivo CSV
-NOMBRE_ARCHIVO_CSV = "QA_FINETUNNING_AV.csv"
+NOMBRE_ARCHIVO_CSV = "QA_FINETUNNING_AV_pt1.csv"
+SAVE_ARCHIVO_CSV = "data_process/QA_FINETUNNING_AV_data_process.csv"
 uploaded_file = st.file_uploader("Sube tu archivo CSV", type=["csv"])
 st.button("Actualizar estado", key=f"update_states_2")
 
@@ -123,7 +124,13 @@ if uploaded_file is not None:
                 df = pd.DataFrame(columns=['context', 'importance', 'human', 'response'])
 
             df = pd.concat([df, df_nuevos_datos], ignore_index=True)
-            df.to_csv(NOMBRE_ARCHIVO_CSV, index=False, sep=';')
+            csv = df.to_csv(index=False, sep=';')
+            st.download_button(
+            label="Descargar CSV",
+            data=csv,
+            file_name=f"datos_procesados_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.csv",
+            mime='text/csv',
+            )
 
             st.success("Datos guardados en el archivo CSV.")
 

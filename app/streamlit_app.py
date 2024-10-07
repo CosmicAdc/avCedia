@@ -1,15 +1,16 @@
 import streamlit as st
 import os
+import re
 from langchain_code.utils import split_document, load_document
 from langchain_code.chains import batch_call_chain, invoke_call_chain,invoke_call_chain_answer,batch_call_chain_answer
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import Docx2txtLoader
 import pandas as pd  # Asegúrate de importar pandas
-
+from langchain_code.model import llm
 # Directorio para guardar los archivos subidos
 UPLOAD_DIRECTORY = "app/static"
-NUM_CARACTERES_ELIMINAR= 80
-NOMBRE_ARCHIVO_CSV = "QA_FINETUNNING_AV.csv"
+NUM_CARACTERES_ELIMINAR= 70
+NOMBRE_ARCHIVO_CSV = "data_process/QA_FINETUNNING_AV_pt1.csv"
 
 # Función para procesar la subida del archivo
 def process_document(uploaded_file):
@@ -65,19 +66,23 @@ if "generated_answers" not in st.session_state:
     st.session_state["generated_answers"] = {}
 
 
-# Función para eliminar un chunk
 def eliminar_chunk(idx):
     temp_chunks = st.session_state["chunks"]
     if 0 <= idx < len(temp_chunks):
-        temp_chunks.pop(idx)  # Elimina el chunk por índice
-        st.session_state["chunks"] = temp_chunks  # Guardar los cambios
-        # Elimina la pregunta generada asociada si existe
-        if idx in st.session_state["generated_questions"]:
-            del st.session_state["generated_questions"][idx]
-        # Forzar el refresco de los índices para las preguntas generadas
-        st.session_state["generated_questions"] = {
-            new_idx: q for new_idx, (old_idx, q) in enumerate(st.session_state["generated_questions"].items()) if old_idx != idx
-        } # Eliminar también la pregunta generada
+        temp_chunks.pop(idx)
+        st.session_state["chunks"] = temp_chunks
+
+        # Eliminar la pregunta, respuesta y contexto generados si existen
+        for key in ["generated_questions", "generated_answers"]:
+            if idx in st.session_state.get(key, {}):
+                del st.session_state[key][idx]
+
+        # Actualizar los índices de las preguntas y respuestas generadas
+        for key in ["generated_questions", "generated_answers"]:
+            st.session_state[key] = {
+                i: v for i, (j, v) in enumerate(sorted(st.session_state[key].items())) if j != idx
+            }
+
 
 # Función para generar pregunta y actualizar en session_state
 def call_invoke_question(idx, chunk):
@@ -183,9 +188,12 @@ if len(chunks) > 0:
     col1_A, col2_A,col3_A = st.columns(3)
     with col1_A:
         if st.button("GENERAR PREGUNTAS"):
-            questions = call_batch_invoke_question(chunks)  # Llamada a batch
-            for idx, question in enumerate(questions):
-                st.session_state["generated_questions"][idx] = question
+            # Procesar preguntas en batches de 20
+            for i in range(0, len(chunks), 20):
+                batch_chunks = chunks[i:i + 20]
+                questions = call_batch_invoke_question(batch_chunks)
+                for j, question in enumerate(questions):
+                    st.session_state["generated_questions"][i + j] = question
         st.button("Actualizar Estado")
 
     with col2_A:
@@ -198,11 +206,15 @@ if len(chunks) > 0:
 
         # Habilitar o deshabilitar el botón según la condición
         if todas_las_preguntas_generadas:
-            if st.button("GENERAR RESPUESTAS", disabled=False):
-                st.write("Generando respuestas para todos los chunks...")
-                answers = call_batch_invoke_answer(chunks, st.session_state["generated_questions"])
-                for idx, answer in enumerate(answers):
-                    st.session_state["generated_answers"][idx] = answer
+                    if st.button("GENERAR RESPUESTAS", disabled=False):
+                        st.write("Generando respuestas para todos los chunks...")
+                        # Procesar respuestas en batches de 20
+                        for i in range(0, len(chunks), 20):
+                            batch_chunks = chunks[i:i + 20]
+                            batch_questions = [st.session_state["generated_questions"][i + j] for j in range(len(batch_chunks))]
+                            answers = call_batch_invoke_answer(batch_chunks, batch_questions)
+                            for j, answer in enumerate(answers):
+                                st.session_state["generated_answers"][i + j] = answer
         else:
             st.button("GENERAR RESPUESTAS", disabled=True)
 
@@ -217,7 +229,7 @@ if len(chunks) > 0:
         # Botón para guardar todas las observaciones en el CSV si todos los campos están completos
       # Botón para guardar todas las observaciones en el CSV si todos los campos están completos
     if completos:
-        if st.button("GUARDAR TODAS EN EL CSV", key="guardar_csv_completo"):
+        if st.button("GUARDAR TODAS EN EL CSV", key="guardar_csv_completo_v1"):
             data = {
                 'context': [chunk.page_content for chunk in st.session_state["chunks"]],
                 'importance': [chunk.metadata.get("importancia", "No definida") for chunk in st.session_state["chunks"]],
@@ -245,26 +257,58 @@ if len(chunks) > 0:
             st.success(f"Todas las observaciones guardadas en {NOMBRE_ARCHIVO_CSV}")
 
         else:
-            st.button("GUARDAR TODAS EN EL CSV", disabled=True, key="guardar_csv_completo")
+            st.button("GUARDAR TODAS EN EL CSV", disabled=True, key="guardar_csv_completo_v2")
 
+
+    
 def limpiar_csv():
     try:
         df = pd.read_csv(NOMBRE_ARCHIVO_CSV, sep=';')
         
-        # Filtrar filas donde 'human' o 'response' contenga "NO INFORMATION", esté vacía o en blanco
-        df_limpio = df[~(df['human'].str.strip().isin(["", "NO INFORMATION"]) | df['response'].str.strip().isin(["", "NO INFORMATION"]))]
-
-        # Guardar el CSV limpio
+        # Filtrar filas usando expresiones regulares
+        patron_eliminar = r"^(Lo siento\.|\s*|NO INFORMATION\.?)$"
+        df_limpio = df[
+            ~df['human'].str.strip().str.fullmatch(patron_eliminar) & 
+            ~df['response'].str.strip().str.fullmatch(patron_eliminar)
+        ]
+        for columna in ['human', 'response']:
+            df_limpio[columna] = df_limpio[columna].apply(lambda texto: ''.join(c for c in texto if ord(c) < 128 or 192 <= ord(c) <= 255))
         df_limpio.to_csv(NOMBRE_ARCHIVO_CSV, index=False, sep=';')
-        st.success("CSV limpiado con éxito. Filas con 'NO INFORMATION' o vacías han sido eliminadas.")
+        st.success("CSV limpiado con éxito. Filas con 'NO INFORMATION', vacías o que comienzan con 'Lo siento' han sido eliminadas.")
     except FileNotFoundError:
         st.error(f"El archivo {NOMBRE_ARCHIVO_CSV} no fue encontrado.")
     except Exception as e:
         st.error(f"Error al limpiar el CSV: {e}")
 
+
+
 # Botón para limpiar el CSV
 if st.button("Limpiar CSV"):
     limpiar_csv()
+      
+if st.button("Contar Tokens"):
+    df = pd.read_csv(NOMBRE_ARCHIVO_CSV, sep=';')
+    
+    # Calcular el número de tokens para las columnas 'human' y 'response'
+    df['input_tokens'] = df['human'].apply(lambda x: llm.get_num_tokens(x) if isinstance(x, str) else 0)
+    df['output_tokens'] = df['response'].apply(lambda x: llm.get_num_tokens(x) if isinstance(x, str) else 0)
+    
+    # Guardar el DataFrame con las estadísticas en un nuevo archivo CSV
+    nombre_archivo_estadisticas = NOMBRE_ARCHIVO_CSV.replace(".csv", "_Statistics.csv")
+    df.to_csv(NOMBRE_ARCHIVO_CSV[:-4]+"_Stadistics.csv", index=False, sep=';')
+
+    # Calcular la suma total de tokens de entrada y salida
+    total_input_tokens = df['input_tokens'].sum()
+    total_output_tokens = df['output_tokens'].sum()
+    total_tokens = total_input_tokens + total_output_tokens
+
+    # Mostrar la suma total de tokens
+    st.write(f"Total de tokens de entrada: {total_input_tokens}")
+    st.write(f"Total de tokens de salida: {total_output_tokens}")
+    st.write(f"Total de tokens: {total_tokens}")
+
+
+
       
 
 else:

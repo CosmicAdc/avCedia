@@ -9,7 +9,7 @@ def show(input):
     print(input)
     return input
 
-template_generate_question_base=""" Utilizando el siguiente contexto, formula una pregunta que se pueda responder de manera clara 
+template_generate_question_base=""" Utilizando el siguiente contexto de un documento legal de un manual de marca para registrar marcas, formula una pregunta que se pueda responder de manera clara 
 y precisa con la información proporcionada, pero no menciones el contexto.  Asegúrate de que la pregunta esté alineada con los detalles del contexto y 
 sea relevante para el tema tratado, en caso que el contexto no tenga información relevante para hacer una buena pregunta responde exactamente: "NO INFORMATION" se estricto con esto.
 No hagas respondas con preguntas que mencionen el contexto proporcionado o frases similares
@@ -34,8 +34,8 @@ def batch_call_chain(docs):
 
 
 
-template_generate_answer_base="""Utilizando el siguiente contexto, responde la pregunta proporcionada utilizando 
-la información que se encuentra en el contexto. No agregues información basada en suposiciones , pero brinda y da toda la información posible acerca del tema .
+template_generate_answer_base="""Utilizando el siguiente contexto de un documento legal de un manual de marca para registrar marcas, responde la pregunta proporcionada utilizando 
+la información que se encuentra en el contexto, usando un lenguaje amigable para la respuesta.  Brinda y da toda la información posible acerca del tema pero enfocandote en el contexto proporcionado .
 Si el contexto no contiene suficiente información para responder la pregunta, responde exactamente: "NO INFORMATION". Sé estricto con esto.
 No menciones en tu respuesta basado en el contexto proporcionado o frases similares en tu respuesta.
 Contexto: {context}

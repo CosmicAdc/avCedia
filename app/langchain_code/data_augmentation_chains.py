@@ -6,21 +6,19 @@ from langchain.output_parsers import CommaSeparatedListOutputParser
 from .model import llm
 
 output_parser = CommaSeparatedListOutputParser()
-format_instructions = "La respuesta debe ser una lista de valores separados por comas, por ejemplo: `¿pregunta variada 1?, ¿pregunta variada 2?, ¿pregunta variada 3?`." 
+format_instructions = "La respuesta debe ser una lista de valores separados por comas , ejemplo: `¿pregunta variada 1? , ¿pregunta variada 2? , ¿pregunta variada 3? , ¿pregunta variada 4?,¿pregunta variada 5? `" 
 
 def show(input):
     print(input)
     return input
 
 
-
-
-template_variation_generate_question=""" A continuación tienes una pregunta y una respuesta basada en un contexto específicode un documento.
+template_variation_generate_question=""" A continuación tienes una pregunta y una respuesta basada en un contexto específico de un documento.
 Tu tarea es generar exactamente {n} versiones alternativas de esta pregunta manteniendo su significado y que se puedan responder con la misma respuesta, 
-pero utilizando diferentes estructuras gramaticales o palabras ,pero  la pregunta nunca debe ser vaga, sino debe especificar el tema del que se trata :
+pero utilizando diferentes estructuras gramaticales o palabras , pero la pregunta nunca debe ser vaga, sino debe especificar el tema del que se trata, las preguntas no deben tener comas aunque sea necesario, ni siquiera las necesarias , a excepción de las separaciones de las preguntas:
 Pregunta: {question}
 Respuesta: {response}
-Genera exactamente {n} variaciones de la pregunta original que conserven el mismo significado , no puede llevar comas a excepción de la separación de tus respuestas:
+Genera exactamente {n} variaciones de la pregunta original que conserven el mismo significado:
 \n{format_instructions}
 """
 
